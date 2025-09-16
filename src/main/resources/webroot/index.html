@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Example</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Form with GET</h1>
+    <form id="helloForm">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" value="John"><br><br>
+        <button type="submit">Submit</button>
+    </form>
+    <div class="result" id="getrespmsg"></div>
+
+    <h1>Form with POST</h1>
+    <form id="helloPostForm">
+        <label for="postname">Name:</label><br>
+        <input type="text" id="postname" name="name" value="John"><br><br>
+        <button type="submit">Submit</button>
+    </form>
+    <div class="result" id="postrespmsg"></div>
+
+    
+    <div class="img-container">
+        <img src="IMAGEN.jpg" alt="Imagen decorativa">
+    </div>
+
+    <h2>Ver código de style.css</h2>
+    <button onclick="mostrarCSS()">Ver Style.css</button>
+    <pre id="cssContent" style="background:#f4f4f4; border:1px solid #ccc; padding:10px; max-height:300px; overflow:auto;"></pre>
+
+    <h2>Ver código de index.html</h2>
+    <button onclick="mostrarIndex()">Ver index.html</button>
+    <pre id="indexContent" style="background:#f4f4f4; border:1px solid #ccc; padding:10px; max-height:300px; overflow:auto;"></pre>
+
+
+    <script>
+
+        document.getElementById('helloForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let nameVar = document.getElementById("name").value;
+            fetch('/App/hello?name=' + encodeURIComponent(nameVar))
+                .then(resp => resp.text())
+                .then(text => {
+                    document.getElementById('getrespmsg').textContent = text;
+                });
+        });
+
+
+        document.getElementById('helloPostForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let nameVar = document.getElementById("postname").value;
+            fetch('/App/hellopost', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'name=' + encodeURIComponent(nameVar)
+            })
+            .then(resp => resp.text())
+            .then(text => {
+                document.getElementById('postrespmsg').textContent = text;
+            });
+        });
+
+        function mostrarCSS() {
+            fetch('/style.css')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('cssContent').textContent = data;
+                });
+        }
+
+        function mostrarIndex() {
+            fetch('/index.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('indexContent').textContent = data;
+                });
+        }
+    </script>
+</body>
+</html>
