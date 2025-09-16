@@ -1,4 +1,8 @@
 # Taller: Aplicación Web, Docker y Despliegue en AWS
+# El video se encuentra en 
+
+https://1drv.ms/f/c/a0a575a235eb8a36/Eu2IFyNDQ65DisncdS9pcjcBXHIIH-zls8u2oIIiX2pAvA?e=JeGcdv
+
 
 - El taller consiste en crear una aplicación web pequeña usando Spring. Una vez    tengamos esta aplicación, construiremos un contenedor Docker para la app, lo desplegaremos y configuraremos en nuestra máquina local, subiremos la imagen a DockerHub y finalmente la desplegaremos en una máquina virtual de AWS.
 
@@ -388,4 +392,3 @@ Usamos Git y GitHub para realizar el versionamiento del proyecto.
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
-# El video se encuentra en src\main\resources\imgReadme\VID_20250915_234538.mp4
