@@ -38,19 +38,115 @@ Verifica las versiones:
 -  java -version
 -  mvn -version
 
+### Instalación
+Clona este repositorio en tu máquina:
+```
+git clone https://github.com/Ttowers-09/Taller_Modularizacion_Virtualizacion_Docker_AREP.git
+```
+Accedemos a la carpeta:
+```
+cd Taller_Modularizacion_Virtualizacion_Docker_AREP
+```
+
+## Ejecución (Solo consola)
+
+Estando dentro de la carpeta Taller_Modularizacion_Virtualizacion_Docker_AREP ejecutamos el siguiente  comando:
+```
+java -cp target/classes com.arep.taller1.talle1arep.MicroSpringBoot
+```
 
 
-## Estructura y puertos de tu proyecto
-- **Puerto de la app en el contenedor:** `8080`  
-- **Puerto expuesto en tu máquina (docker-compose):** `8087`  
-- **Archivos estáticos:** en `webroot` (por ejemplo, `index.html`)  
-- **Clase principal:** `com.arep.taller1.talle1arep.MicroSpringBoot` (o `HttpServer`)  
+la consola se quedará esperando respuesta asi que nos dirigimos a nuestro browser y escribimos:
+```
+http://localhost:8080
+```
+aqui visualizaremos el mensaje "Hola".
 
-### Endpoints principales
-- `GET /hello?name=TuNombre` → **Hello, TuNombre!**  
-- `GET /App/pi` → **valor de pi**  
-- `POST /App/hellopost` → **respuesta a formulario POST**  
-- `GET /index.html` o `/` → **muestra el formulario HTML**  
+Si queremos ver nuestro archivo index:
+```
+http://localhost:8080/index.html
+```
+
+## Ejecución (Con Maven)
+Estando dentro de la carpeta Arep_Taller1_IvanTorres ejecutamos el siguiente  comando:
+```
+mvn clean install
+```
+Con esto aseguramos que la compilación se realice desde cero eliminando cualquier archivo de compilación anterior.
+luego utilizamos:
+```
+mvn compile
+```
+Para ejecutar el código fuente del proyecto.
+luego utilizamos:
+```
+mvn exec:java
+```
+Para ejecutar la clase principal con método main, se verá de la siguiente manera.
+![Evidencia](src/main/resources/imgReadme/1.png)
+
+
+### Finalizar la ejecución
+
+En la consola ejecutamos la combinación de teclas: 
+
+```
+Windows: Ctrl + C
+Mac: Comando + C
+```
+## Prueba de funcionalidades:
+-Cuando carga en el buscador se verá de la siguiente manera:
+![Evidencia](src/main/resources/imgReadme/2.png)
+
+- Luego ejecutamos lo siguiente en nuestro buscador, deberiamos de ver la salida "Hello + {nombre}"
+```
+http://localhost:8080/App/hello?name=nombre
+```
+![Evidencia](src/main/resources/imgReadme/nombre.png)
+
+- Al ejecutar el siguiente valor deberiamos de ver el valor numérico del valor de PI
+```
+http://localhost:8080/App/pi
+```
+![Evidencia](src/main/resources/imgReadme/pi.png)
+
+- Para visualizar los archivos estáticos, los cuales estan en la carpeta resources:
+```
+http://localhost:8080/index.html
+```
+![Evidencia](src/main/resources/imgReadme/index.png)
+![Evidencia](src/main/resources/imgReadme/index2.png)
+![Evidencia](src/main/resources/imgReadme/index3.png)
+
+- Para ejecutar el método GET podemos utilizar el cuadro para poder colocar cualquier nombre:
+![Evidencia](src/main/resources/imgReadme/Get.png)
+![Evidencia](src/main/resources/imgReadme/get2.png)
+
+- Para ejecutar el método POST podemos utilizar el cuadro para poder colocar cualquier nombre:
+![Evidencia](src/main/resources/imgReadme/Post.png)
+![Evidencia](src/main/resources/imgReadme/post2.png)
+
+- Podemos visualizar los archivos estaticos definiendolos en nuestras URL, de la siguiente manera:
+![Evidencia](src/main/resources/imgReadme/estatico.png)
+
+además de eso, en el index podemos encontrar botones para ver los archivos:
+![Evidencia](src/main/resources/imgReadme/estatico2.png)
+
+## Arquitectura Backend:
+- @RestController: presenta las clases que exponen los servicios web.
+- @GetMapping: Métodos que involucran un GET.
+- @RequestParam: Inyecta parámetros a las solicitudes de nuestro servidor.
+- Servidor HTTP: Resuelve nuestros métodos get y post, además de eso presenta archivos estáticos en nuestro servidor.
+
+## Endpoints de nuestro código:
+- Método **Get** en la ruta **/** con respuesta **Hola AREP de Ivan**
+- Método **Get** en la ruta **/greeting** con respuesta **Hola AREP**
+- Método **Get** en la ruta **/greeting?name=Ivan** con respuesta **Hola Ivan**
+
+- Método **Get** en la ruta **/App/hello?name=Ivan** con respuesta **Hola Ivan**
+- Método **Get** en la ruta **/App/hello** con respuesta **Hola desconocido**
+- Método **Get** en la ruta **/App/pi** con respuesta **3.141592653589793**
+-
 
 **Visibilidad de archivos estáticos:**
 - http://localhost:8080/index.html: veremos el archivo index.html el cual contendrá los métodos Get, Post, visibilidad de código style.css e imagen.
@@ -58,7 +154,6 @@ Verifica las versiones:
 - http://localhost:8080/style.css: Veremos el codigo Css de la página.
 
 - http://localhost:8080/IMAGEN.jpg: Veremos una imagen estática igual a la que se encuentra en el index.html.
-
 ## Compilación y dependencias
 
 Compila con **Java 17+**  
@@ -265,6 +360,17 @@ http://ec2-34-230-35-71.compute-1.amazonaws.com:8080/hello
 
 - **Maven** - Se utiliza como herramienta de gestión de dependencias y compilación.
 
+
+## Ejecutar los Test:
+- Los test se encuentran en la carpeta: ../test/java/com/arep/taller1/talle1arep
+
+- Para ejecutar los test utilizamos el siguiente comando:
+```
+mvn test
+```
+![Evidencia](src/main/resources/imgReadme/test.png)
+
+
 ## Contribuir
 
 En caso de querer contribuir envia una pull request especificando los cambios, en que afecta el código, el comportamiento del proyecto y su beneficio.
@@ -281,3 +387,5 @@ Usamos Git y GitHub para realizar el versionamiento del proyecto.
 ## Licencia
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+# El video se encuentra en src\main\resources\imgReadme\VID_20250915_234538.mp4
